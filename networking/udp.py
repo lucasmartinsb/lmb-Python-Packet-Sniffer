@@ -1,8 +1,6 @@
-import struct
-
-
 class UDP:
-
-    def __init__(self, raw_data):
-        self.src_port, self.dest_port, self.size = struct.unpack('! H H 2x H', raw_data[:8])
-        self.data = raw_data[8:]
+    def __init__(self, packet):
+        self.src_port = packet.sport
+        self.dest_port = packet.dport
+        self.size = packet.len
+        self.data = bytes(packet.payload)
